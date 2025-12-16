@@ -156,7 +156,20 @@ const ScreenshotAnnotatorModal = ({
   };
 
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
+    <Modal
+      visible={visible}
+      transparent
+      animationType="fade"
+      onRequestClose={onClose}
+      presentationStyle="overFullScreen"
+      supportedOrientations={[
+        "portrait",
+        "portrait-upside-down",
+        "landscape",
+        "landscape-left",
+        "landscape-right",
+      ]}
+    >
       <View style={styles.backdrop}>
         <View style={styles.card}>
           <View style={styles.header}>

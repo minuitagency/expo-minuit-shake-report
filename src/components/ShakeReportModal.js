@@ -41,8 +41,9 @@ const ShakeReportModal = ({
   errorMessage = "",
 }) => {
   const { width, height } = useWindowDimensions();
-  const isDesktop = width >= 840;
-  const maxCardHeight = Math.max(360, height * 0.7);
+  const isDesktop = Math.min(width, height) >= 600;
+  const maxCardHeight = Math.max(360, height * (isDesktop ? 0.82 : 0.7));
+  const cardHeight = Math.min(isDesktop ? 720 : 600, maxCardHeight);
   if (!visible) {
     return null;
   }
@@ -69,11 +70,11 @@ const ShakeReportModal = ({
   );
 
   const content = (
-    <View style={styles.cardWrapper}>
+      <View style={styles.cardWrapper}>
       <View
         style={[
           styles.card,
-          { maxHeight: maxCardHeight, minHeight: 360 },
+          { height: cardHeight, maxHeight: maxCardHeight, minHeight: 360 },
           isDesktop ? styles.cardDesktop : styles.cardMobile,
         ]}
       >
@@ -97,7 +98,7 @@ const ShakeReportModal = ({
         >
           <Text style={[styles.title, isDesktop ? styles.titleDesktop : null]}>Signaler un problème</Text>
           <Text style={[styles.subtitle, isDesktop ? styles.subtitleDesktop : null]}>
-            Secouez votre téléphone pour capturer l'écran et décrire ce qui ne fonctionne pas.
+            Secouez votre appareil pour capturer l'écran et décrire ce qui ne fonctionne pas.
           </Text>
 
           {renderScreenshot()}
@@ -160,7 +161,20 @@ const ShakeReportModal = ({
   );
 
   return (
-    <Modal animationType="fade" transparent visible={visible} onRequestClose={onRequestClose}>
+    <Modal
+      animationType="fade"
+      transparent
+      visible={visible}
+      onRequestClose={onRequestClose}
+      presentationStyle="overFullScreen"
+      supportedOrientations={[
+        "portrait",
+        "portrait-upside-down",
+        "landscape",
+        "landscape-left",
+        "landscape-right",
+      ]}
+    >
       <BlurView tint="dark" intensity={20} style={styles.backdrop}>
         <KeyboardAvoidingView
           style={styles.keyboardContainer}

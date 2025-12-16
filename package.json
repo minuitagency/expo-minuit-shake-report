@@ -1,6 +1,6 @@
 {
   "name": "expo-minuit-shake-report",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Shake-to-report provider with built-in screenshot capture and submission, themed for Minuit.",
   "main": "src/index.js",
   "react-native": "src/index.js",

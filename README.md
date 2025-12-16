@@ -5,7 +5,7 @@ Provider Expo/React Native pour déclencher un formulaire de bug report en secou
 ## Fonctionnalités
 - Détection de secousses (accéléromètre) avec seuil configurable et anti-spam (cooldown).
 - Capture automatique de l’écran (PNG base64) avant l’ouverture de la modale.
-- UI prête à l’emploi : modale floutée, email optionnel, description obligatoire, aperçu de la capture.
+- UI prête à l’emploi (iPhone/iPad/tablettes) : modale floutée, email optionnel, description obligatoire, aperçu de la capture.
 - Hook `useShakeReport` pour ouvrir manuellement le reporter et connaître l’état d’envoi.
 - Envoi JSON vers l’endpoint Cloud Functions Minuit (`tasks-publishTask`) avec le payload complet.
 
@@ -13,6 +13,10 @@ Provider Expo/React Native pour déclencher un formulaire de bug report en secou
 - Expo `>=53.0.0`, React `>=18.0.0`, React Native `>=0.79.0`.
 - Dépendances déjà embarquées : `expo-sensors`, `react-native-view-shot`, `expo-blur` (aucune install supplémentaire).
 - Cible principale : iOS/Android. Sur web, la capture d’écran est désactivée, donc aucun envoi n’est possible sans implémenter votre propre capture.
+
+## iPad / tablettes
+- La modale s’adapte aux grands écrans (iPad) et aux modes Split View (hauteur dynamique).
+- Pour que votre app Expo s’installe bien sur iPad, vérifiez que `ios.supportsTablet` est activé dans votre `app.json`/`app.config.js` (et, si vous voulez autoriser Split View, que `UIRequiresFullScreen` n’est pas forcé à `true`).
 
 ## Installation
 
